@@ -1,0 +1,40 @@
+apiVersion: 2021-03-01
+location: westeurope
+name: tku-paoh-intra-ytrservicedataimport-__environment__
+type: Microsoft.ContainerInstance/containerGroups
+properties:
+  sku: Standard
+  containers:
+  - name: tku-paoh-intra-ytrservicedataimport-__environment__
+    properties:
+      image: __dockerregistryname__.azurecr.io/ytrservicedataimport:__tag__
+      environmentVariables:
+      - name: MONGO_HOST
+        value: __intramongohost__
+      - name: MONGO_PORT
+        value: "__intramongoport__"
+      - name: MONGO_USERNAME
+        value: __mongousername__
+      - name: MONGO_PASSWORD
+        value: __mongopassword__
+      - name: MONGO_DB
+        value: __servicedbmongodb__
+      - name: KOMPASSIYTR_HOST
+        value: __kompassiytrhost__
+      - name: KOMPASSIYTR_PORT
+        value: __kompassiytrport__
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+      ports:
+      - protocol: TCP
+        port: 80
+  osType: Linux
+  imageRegistryCredentials:
+  - server: __dockerregistryname__.azurecr.io
+    username: __dockerregistryserverusername__
+    password: __dockerregistryserverpassword__
+  restartPolicy: Never
+  networkProfile:
+    id: /subscriptions/__azuresubscription__/resourceGroups/__intraResourceGroup__/providers/Microsoft.Network/networkProfiles/tku-paoh-intra-ytrservicedataimport-__environment__-networkProfile

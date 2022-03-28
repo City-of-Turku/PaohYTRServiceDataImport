@@ -1,0 +1,21 @@
+version: '3.4'
+services:
+  ytr-service-data-import:
+    build: ./ytr_service_data_import
+    image: ytr-service-data-import-image
+    container_name: ytr-service-data-import-container
+    restart: "no"
+    environment:
+      MONGO_DB: 'service_db'
+      MONGO_PORT: '27017'
+      MONGO_HOST: '${MONGO_HOST}'
+      MONGO_USERNAME: '${MONGO_USERNAME}'
+      MONGO_PASSWORD: '${MONGO_PASSWORD}'
+    # extra_hosts:
+    #   - "dockerhost:${MONGO_HOST}"
+
+
+
+
+        
+
